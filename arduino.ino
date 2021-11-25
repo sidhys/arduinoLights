@@ -1,4 +1,4 @@
-
+// edit to wtvr pin number 
 #define led1 9
 #define led2 8
 #define led3 7 
