@@ -1,12 +1,19 @@
-// edit to wtvr pin number 
+#include <IRremote.h>
+
+// pin thing
+#define irpin 3
 #define led1 9
 #define led2 8
 #define led3 7 
 #define led4 6
 
+IRrecv IR(irpin);
+decode_results results; 
 
 void setup() {
 
+ IR.enableIRIn(); 
+  
  pinMode(led1, OUTPUT); 
  pinMode(led2, OUTPUT); 
  pinMode(led3, OUTPUT); 
@@ -14,7 +21,8 @@ void setup() {
  
 }
 
-void loop() {
+void lightPattern() {
+
   digitalWrite(led1, HIGH); 
   digitalWrite(led2, HIGH); 
   digitalWrite(led3, HIGH); 
@@ -70,5 +78,11 @@ void loop() {
   digitalWrite(led3, LOW); 
   delay(100); 
   digitalWrite(led4, LOW);  
-  delay(1000);
+ } 
+
+void loop() {
+  if(IR.decode(&results)) {
+    lightPattern(); 
+    IR.resume(); 
+   } 
 }
