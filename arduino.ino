@@ -1,4 +1,4 @@
-#include <IRremote.h>
+#include <IRremote.h> // version 2.8
 
 // pin thing
 #define irpin 3
