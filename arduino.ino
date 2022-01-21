@@ -10,11 +10,10 @@ uint led[4] = {0x09, 0x08, 0x07, 0x06};
 IRrecv IR(INFARED_PIN);
 decode_results results; 
 
-
 void setup() {
-
+ 
  IR.enableIRIn(); 
-
+ 
  for (const int &currentLed : led) 
     pinMode(currentLed, OUTPUT); 
  
@@ -27,6 +26,7 @@ void lightPattern() {
 
   while (currentCycle < cycles) 
   {
+   
     uchar possibleLedOutputs[] = {(uchar*)"HIGH", (uchar*)"LOW"}; 
 
     for (const int &light : led) 
@@ -35,13 +35,19 @@ void lightPattern() {
     delay(100); 
       
     currentCycle++; 
+
   };
-  
- };
+ 
+};
 
 void loop() {
+ 
   if(IR.decode(&results)) {
+   
     lightPattern(); 
+   
     IR.resume(); 
+   
    }; 
+ 
 };
