@@ -29,7 +29,7 @@ void lightPattern() {
   {
     uchar possibleLedOutputs[] = {(uchar*)"HIGH", (uchar*)"LOW"}; 
 
-    for (const int &light: led) 
+    for (const int &light : led) 
       digitalWrite(light, possibleLedOutputs[random(sizeof(possibleLedOutputs))+1]);
 
     delay(100); 
