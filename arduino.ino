@@ -1,14 +1,15 @@
-#include <IRremote.h> // version 2.8
+#include <IRremote.h>
 
-// pin thing
-#define irpin 3
-#define led1 9
-#define led2 8
-#define led3 7 
-#define led4 6
+#define irpin 0x03
+#define led1 0x09
+#define led2 0x08
+#define led3 0x07
+#define led4 0x06
 
 IRrecv IR(irpin);
 decode_results results; 
+
+
 
 void setup() {
 
