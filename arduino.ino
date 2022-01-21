@@ -1,89 +1,47 @@
 #include <IRremote.h>
 
-#define irpin 0x03
-#define led1 0x09
-#define led2 0x08
-#define led3 0x07
-#define led4 0x06
+typedef unsigned int uint; 
+typedef unsigned char uchar;
 
-IRrecv IR(irpin);
+uint INFARED_PIN = 0x03;
+
+uint led[4] = {0x09, 0x08, 0x07, 0x06};
+
+IRrecv IR(INFARED_PIN);
 decode_results results; 
-
 
 
 void setup() {
 
  IR.enableIRIn(); 
-  
- pinMode(led1, OUTPUT); 
- pinMode(led2, OUTPUT); 
- pinMode(led3, OUTPUT); 
- pinMode(led4, OUTPUT); 
+
+ for (const int &currentLed : led) 
+    pinMode(currentLed, OUTPUT); 
  
-}
+};
 
 void lightPattern() {
 
-  digitalWrite(led1, HIGH); 
-  digitalWrite(led2, HIGH); 
-  digitalWrite(led3, HIGH); 
-  digitalWrite(led4, HIGH); 
-  delay(500); 
-  digitalWrite(led1, LOW); 
-  digitalWrite(led2, LOW); 
-  digitalWrite(led3, LOW); 
-  digitalWrite(led4, LOW); 
-  delay(500); 
-  digitalWrite(led1, HIGH); 
-  delay(100);
-  digitalWrite(led2, HIGH); 
-  delay(100);
-  digitalWrite(led3, HIGH); 
-  delay(100);
-  digitalWrite(led4, HIGH); 
-  delay(1000);
-  digitalWrite(led1, LOW); 
-  digitalWrite(led2, LOW); 
-  digitalWrite(led3, LOW); 
-  digitalWrite(led4, LOW); 
-  delay(500);
-  digitalWrite(led1, HIGH); 
-  digitalWrite(led2, HIGH); 
-  digitalWrite(led3, HIGH); 
-  digitalWrite(led4, HIGH); 
-  delay(500); 
-  digitalWrite(led1, LOW); 
-  digitalWrite(led2, LOW); 
-  digitalWrite(led3, LOW); 
-  digitalWrite(led4, LOW); 
-  delay(500);
-  digitalWrite(led1, HIGH); 
-  digitalWrite(led2, HIGH); 
-  digitalWrite(led3, HIGH); 
-  digitalWrite(led4, HIGH); 
-  delay(500); 
-  digitalWrite(led1, LOW); 
-  digitalWrite(led2, LOW); 
-  digitalWrite(led3, LOW); 
-  digitalWrite(led4, LOW); 
-  delay(500);
-  digitalWrite(led1, HIGH); 
-  digitalWrite(led2, HIGH); 
-  digitalWrite(led3, HIGH); 
-  digitalWrite(led4, HIGH); 
-  delay(1000); 
-  digitalWrite(led1, LOW); 
-  delay(100);
-  digitalWrite(led2, LOW); 
-  delay(100); 
-  digitalWrite(led3, LOW); 
-  delay(100); 
-  digitalWrite(led4, LOW);  
- } 
+  uint cycles = random(10); 
+  uint currentCycle = 0; 
+
+  while (currentCycle < cycles) 
+  {
+    uchar possibleLedOutputs[] = {(uchar*)"HIGH", (uchar*)"LOW"}; 
+
+    for (const int &light: led) 
+      digitalWrite(light, possibleLedOutputs[random(sizeof(possibleLedOutputs))+1]);
+
+    delay(100); 
+      
+    currentCycle++; 
+  };
+  
+ };
 
 void loop() {
   if(IR.decode(&results)) {
     lightPattern(); 
     IR.resume(); 
-   } 
-}
+   }; 
+};
