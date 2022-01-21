@@ -1,2 +1,0 @@
-# arduinoLights
-light animation thing 
