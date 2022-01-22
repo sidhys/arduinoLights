@@ -1,11 +1,11 @@
 #include <IRremote.h>
 
-typedef unsigned int uint; 
-typedef unsigned char uchar;
+typedef unsigned int UINT; 
+typedef unsigned char UCHAR;
 
-uint INFARED_PIN = 0x03;
+UINT INFARED_PIN = 0x03;
 
-uint led[4] = {0x09, 0x08, 0x07, 0x06};
+UINT led[4] = {0x09, 0x08, 0x07, 0x06};
 
 IRrecv IR(INFARED_PIN);
 decode_results results; 
@@ -21,13 +21,13 @@ void setup() {
 
 void lightPattern() {
 
-  uint cycles = random(10); 
-  uint currentCycle = 0; 
+  UINT cycles = random(10); 
+  UINT currentCycle = 0; 
 
   while (currentCycle < cycles) 
   {
    
-    uchar possibleLedOutputs[] = {(uchar*)"HIGH", (uchar*)"LOW"}; 
+    UCHAR possibleLedOutputs[] = {(UCHAR*)"HIGH", (UCHAR*)"LOW"}; 
 
     for (const int &light : led) 
       digitalWrite(light, possibleLedOutputs[random(sizeof(possibleLedOutputs))+1]);
